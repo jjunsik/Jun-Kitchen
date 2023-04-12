@@ -46,6 +46,13 @@ public class RevenueEntity {
                 System.out.println("메뉴 이름: " + menuentity.getMenuName() + ", 매출액: " + menuentity.getMenuRevenue() + "만원");
             }
         }
+        System.out.println("\n");
+
+        int allrev = 0;
+        for(MenuEntity menuentity : foundmenus) {
+            allrev += menuentity.getMenuRevenue();
+        }
+        System.out.println("총매출: " + allrev + "만원");
     }
 
 

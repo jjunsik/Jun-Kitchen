@@ -8,29 +8,29 @@ import java.util.List;
 import java.util.Map;
 
 public class MenuStore {
-	private Map<String, MenuEntity> menumap;
-	
+	private final Map<String, MenuEntity> menuMap;
+
 	public MenuStore() {
-		this.menumap =new HashMap<>();
-	}
-	
-	public List<MenuEntity> retrieveAll() {
-		return new ArrayList<>(this.menumap.values());
-	}
-	
-	public void create(MenuEntity menuentity) {
-		this.menumap.put(menuentity.getMenuName(), menuentity);
-	}
-	
-	public MenuEntity retrieve(String menuname){
-		return this.menumap.get(menuname);
+		this.menuMap =new HashMap<>();
 	}
 
-	public void update(MenuEntity updatemenu) {
-		this.menumap.put(updatemenu.getMenuName(), updatemenu);
+	public List<MenuEntity> retrieveAll() {
+		return new ArrayList<>(this.menuMap.values());
 	}
-	
-	public void delete(String menuname) {
-		this.menumap.remove(menuname);
+
+	public void create(MenuEntity menuEntity) {
+		this.menuMap.put(menuEntity.getMenuName(), menuEntity);
+	}
+
+	public MenuEntity retrieve(String menuName){
+		return this.menuMap.get(menuName);
+	}
+
+	public void update(MenuEntity updateMenu) {
+		this.menuMap.put(updateMenu.getMenuName(), updateMenu);
+	}
+
+	public void delete(String menuName) {
+		this.menuMap.remove(menuName);
 	}
 }

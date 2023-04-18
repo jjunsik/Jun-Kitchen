@@ -3,14 +3,14 @@ package main.java;
 import main.java.screen.MainScreen;
 
 public class StoryAssistant {
-	private void startstory() {
-		MainScreen mainscreen = new MainScreen();
-		mainscreen.show();
+	private void startStory() {
+		MainScreen mainScreen = new MainScreen();
+		mainScreen.show();
 	}
 
 	public static void main(String[] args) {
 		StoryAssistant assistant = new StoryAssistant();
-		assistant.startstory();
+		assistant.startStory();
 	}
 
 }

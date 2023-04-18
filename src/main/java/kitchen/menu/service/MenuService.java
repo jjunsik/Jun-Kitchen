@@ -7,29 +7,29 @@ import main.java.kitchen.menu.entity.MenuEntity;
 import java.util.List;
 
 public class MenuService {
-	private MenuStore menustore;
-	
+	private final MenuStore menuStore;
+
 	public MenuService() {
-		this.menustore = MenuStoreLifeCycle.getUniqueInstance().requestMenuStore();
+		this.menuStore = MenuStoreLifeCycle.getUniqueInstance().requestMenuStore();
 	}
-	
+
 	public List<MenuEntity> findAll() {
-		return this.menustore.retrieveAll();
+		return this.menuStore.retrieveAll();
 	}
 
-	public void addMenu(MenuEntity newmenu) {
-		this.menustore.create(newmenu);
-	}
-	
-	public MenuEntity findByName(String menuname) {
-		return this.menustore.retrieve(menuname);
+	public void addMenu(MenuEntity newMenu) {
+		this.menuStore.create(newMenu);
 	}
 
-	public void modifyMenu(MenuEntity modifymenu) {
-		this.menustore.update(modifymenu);
+	public MenuEntity findByName(String menuName) {
+		return this.menuStore.retrieve(menuName);
 	}
-	
-	public void removeMenu(String menuname) {
-		this.menustore.delete(menuname);
+
+	public void modifyMenu(MenuEntity modifyMenu) {
+		this.menuStore.update(modifyMenu);
+	}
+
+	public void removeMenu(String menuName) {
+		this.menuStore.delete(menuName);
 	}
 }

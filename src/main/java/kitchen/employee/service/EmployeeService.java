@@ -7,29 +7,29 @@ import main.java.kitchen.employee.entity.EmployeeEntity;
 import java.util.List;
 
 public class EmployeeService {
-	private EmployeeStore empstore;
-	
+	private final EmployeeStore empStore;
+
 	public EmployeeService() {
-		this.empstore = EmployeeStoreLifeCycle.getUniqueInstance().requestEmployeeStore();
+		this.empStore = EmployeeStoreLifeCycle.getUniqueInstance().requestEmployeeStore();
 	}
-	
+
 	public List<EmployeeEntity> findAll() {
-		return this.empstore.retrieveAll();
+		return this.empStore.retrieveAll();
 	}
 
-	public void addEmp(EmployeeEntity newemp) {
-		this.empstore.create(newemp);
-	}
-	
-	public EmployeeEntity findByNo(String empno) {
-		return this.empstore.retrieve(empno);
+	public void addEmp(EmployeeEntity newEmp) {
+		this.empStore.create(newEmp);
 	}
 
-	public void modifyEmp(EmployeeEntity modifyemp) {
-		this.empstore.update(modifyemp);
+	public EmployeeEntity findByNo(String empNo) {
+		return this.empStore.retrieve(empNo);
 	}
-	
-	public void removeEmp(String empno) {
-		this.empstore.delete(empno);
+
+	public void modifyEmp(EmployeeEntity modifyEmp) {
+		this.empStore.update(modifyEmp);
+	}
+
+	public void removeEmp(String empNo) {
+		this.empStore.delete(empNo);
 	}
 }

@@ -8,29 +8,29 @@ import java.util.List;
 import java.util.Map;
 
 public class EmployeeStore {
-	private Map<String, EmployeeEntity> empmap;
-	
+	private final Map<String, EmployeeEntity> empMap;
+
 	public EmployeeStore() {
-		this.empmap =new HashMap<>();
+		this.empMap =new HashMap<>();
 	}
-	
+
 	public List<EmployeeEntity> retrieveAll() {
-		return new ArrayList<>(this.empmap.values());
+		return new ArrayList<>(this.empMap.values());
 	}
-	
-	public void create(EmployeeEntity empentity) {
-		this.empmap.put(empentity.getEmpNo(), empentity);
+
+	public void create(EmployeeEntity empEntity) {
+		this.empMap.put(empEntity.getEmpNo(), empEntity);
 	}
-	
+
 	public EmployeeEntity retrieve(String empNo){
-		return this.empmap.get(empNo);
+		return this.empMap.get(empNo);
 	}
 
 	public void update(EmployeeEntity updateEmp) {
-		this.empmap.put(updateEmp.getEmpNo(), updateEmp);
+		this.empMap.put(updateEmp.getEmpNo(), updateEmp);
 	}
-	
+
 	public void delete(String empNo) {
-		this.empmap.remove(empNo);
+		this.empMap.remove(empNo);
 	}
 }

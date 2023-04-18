@@ -2,20 +2,20 @@ package main.java.kitchen.employee.store;
 
 public class EmployeeStoreLifeCycle {
 	private static EmployeeStoreLifeCycle uniqueInstance;
-	private EmployeeStore empstore;
-	
+	private final EmployeeStore empStore;
+
 	private EmployeeStoreLifeCycle() {
-		this.empstore = new EmployeeStore();
+		this.empStore = new EmployeeStore();
 	}
-	
+
 	public static EmployeeStoreLifeCycle getUniqueInstance() {
 		if(uniqueInstance == null) {
 			uniqueInstance = new EmployeeStoreLifeCycle();
 		}
 		return uniqueInstance;
 	}
-	
+
 	public EmployeeStore requestEmployeeStore() {
-		return this.empstore;
+		return this.empStore;
 	}
 }

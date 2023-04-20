@@ -1,14 +1,16 @@
 package main.java.kitchen.menu.display;
 
+import main.java.util.ConsoleManager;
+
 import java.util.Scanner;
 
-public class Menu {
-	private Scanner scanner;
-	private MenuConsole menuconsole;
-	
+public class Menu extends ConsoleManager {
+
+	private final MenuConsole menuConsole;
+
 	public Menu() {
-		scanner = new Scanner(System.in);
-		this.menuconsole = new MenuConsole();
+		super(new Scanner(System.in));
+		this.menuConsole = new MenuConsole();
 	}
 
 	public void menuMainScreen() {
@@ -39,28 +41,17 @@ public class Menu {
 		}
 
 	}
-	
-	public void displayMenu() {
-		System.out.println("........................");
-		System.out.println("# 메뉴 관리");
+
+	private void displayMenu() {
+		displayStart("# 메뉴 관리");
 		System.out.println("1. 현재 메뉴 확인");
 		System.out.println("2. 메뉴 추가");
 		System.out.println("3. 메뉴 수정");
 		System.out.println("4. 메뉴 삭제");
-		System.out.println("........................");
-		System.out.println("0. 이전");
-		System.out.println("........................");
-	}
-	
-	public int selectMenu() {
-		System.out.print("번호를 입력하세요: ");
-		int menuNumber = scanner.nextInt();
-		if (menuNumber >= 0 && menuNumber <= 4) {
-			scanner.nextLine();
-			return menuNumber;
-		} else {
-			return -1;
-		}
+		displayEnd("0. 이전");
 	}
 
+	private int selectMenu() {
+		return select(0, 4);
+	}
 }

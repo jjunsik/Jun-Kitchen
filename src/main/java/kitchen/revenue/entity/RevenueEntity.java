@@ -13,9 +13,14 @@ public class RevenueEntity {
         this.menuService = MenuServiceLogicLifeCycle.getUniqueInstance().getMenuService();
     }
 
-    public void allmenuRev() {
-        List<MenuEntity> foundmenus =  menuservice.findAll();
-        foundmenus.sort((m1, m2) -> ((Integer) m1.getMenuRevenue()).compareTo(m2.getMenuRevenue()));
+    public void allMenuRev() {
+        List<MenuEntity> foundMenus =  menuService.findAll();
+        foundMenus.sort(new Comparator<MenuEntity>() {
+            @Override
+            public int compare(MenuEntity o1, MenuEntity o2) {
+                return o1.getMenuRevenue() - o2.getMenuRevenue();
+            }
+        });
 
         System.out.println("----------------------- 한식 -----------------------");
         for(MenuEntity menuentity : foundmenus) {

@@ -17,10 +17,14 @@ public class EmployeeConsole {
 	}
 
 	public void allEmp() {
-		List<EmployeeEntity> foundemps = empservice.findAll();
-		foundemps.sort((m1, m2) -> ((Integer)m1.getEmpPeriod()).compareTo(m2.getEmpPeriod()));
-		
-		if(foundemps.isEmpty()) {
+		List<EmployeeEntity> foundEmp = empService.findAll();
+		foundEmp.sort(new Comparator<EmployeeEntity>() {
+			@Override
+			public int compare(EmployeeEntity o1, EmployeeEntity o2) {
+				return o1.getEmpPeriod() - o2.getEmpPeriod();
+			}
+		});
+		if(foundEmp.isEmpty()) {
 			System.out.println("등록된 직원이 없습니다. 직원을 추가해주세요!");
 			return;
 		}

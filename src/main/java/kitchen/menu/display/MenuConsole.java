@@ -16,10 +16,19 @@ public class MenuConsole {
 		this.menuservice = MenuServiceLogicLifeCycle.getUniqueInstance().getMenuService();
 	}
 
-	public void allMenu() {
-		List<MenuEntity> foundmenus =  menuservice.findAll();
-		foundmenus.sort((m1, m2) -> ((Integer) m1.getMenuPrice()).compareTo(m2.getMenuPrice()));
-		if(foundmenus.isEmpty()) {
+	public void allMenu(){
+		List<MenuEntity> foundMenus =  menuService.findAll();
+
+		foundMenus.sort(new Comparator<MenuEntity>() {
+			@Override
+			public int compare(MenuEntity o1, MenuEntity o2) {
+				int value = o1.getMenuPrice() - o2.getMenuPrice();
+
+				return value == 0 ? o1.getMenuName().length() - o2.getMenuName().length() : value;
+			}
+		});
+
+		if(foundMenus.isEmpty()) {
 			System.out.println("등록된 메뉴가 없습니다. 메뉴를 추가해주세요!");
 			return;
 		}

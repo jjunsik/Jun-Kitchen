@@ -10,34 +10,34 @@ public class Menu {
 		scanner = new Scanner(System.in);
 		this.menuconsole = new MenuConsole();
 	}
-	
+
 	public void menuMainScreen() {
-		int inputNumber = 0;
-		
-		while(true) {
+		int inputNumber;
+
+		while (true) {
 			displayMenu();
 			inputNumber = selectMenu();
-			
+
 			switch (inputNumber) {
-			case 1:
-				menuconsole.allMenu();
-				break;
-			case 2:
-				menuconsole.addMenu();
-				break;
-			case 3:
-				menuconsole.modifyMenu();
-				break;
-			case 4:
-				menuconsole.removeMenu();
-				break;
-			case 0:
-				return;
-			default:
-				System.out.println("다시 입력해주세요.");
+				case 1:
+					menuConsole.allMenu();
+					break;
+				case 2:
+					menuConsole.addMenu();
+					break;
+				case 3:
+					menuConsole.modifyMenu();
+					break;
+				case 4:
+					menuConsole.removeMenu();
+					break;
+				case 0:
+					return;
+				default:
+					System.out.println("다시 입력해주세요.");
 			}
 		}
-		
+
 	}
 	
 	public void displayMenu() {

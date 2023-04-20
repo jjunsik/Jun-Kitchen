@@ -90,13 +90,13 @@ public class MenuConsole {
 			return;
 		}
 
-		MenuEntity targetmenu = menuservice.findByName(menuname);
-		if(targetmenu == null) {
+		MenuEntity targetMenu = menuService.findByName(menuName);
+		if(targetMenu == null) {
 			System.out.println("존재하지 않는 메뉴입니다.");
 			return;
 		}
 
-		System.out.println("수정 전 메뉴의 가격: " + targetmenu.getMenuPrice());
+		System.out.println("수정 전 메뉴의 가격: " + targetMenu.getMenuPrice());
 
 		Integer newmenu = consoleutil.getIntOf("수정할 메뉴의 가격(0. 이전)");
 		if(newmenu == 0) {
@@ -132,8 +132,8 @@ public class MenuConsole {
 			return;
 		}
 
-		MenuEntity targetmenu = menuservice.findByName(menuname);
-		if(targetmenu == null) {
+		MenuEntity targetMenu = menuService.findByName(menuName);
+		if(targetMenu == null) {
 			System.out.println("존재하지 않는 메뉴입니다.");
 			return;
 		}

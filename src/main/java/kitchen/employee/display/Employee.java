@@ -10,34 +10,34 @@ public class Employee {
 		scanner = new Scanner(System.in);
 		this.empconsole = new EmployeeConsole();
 	}
-	
+
 	public void empMainScreen() {
-		int inputNumber = 0;
-		
+		int inputNumber;
+
 		while(true) {
 			displayMenu();
 			inputNumber = selectMenu();
-			
+
 			switch (inputNumber) {
-			case 1:
-				empconsole.allEmp();
-				break;
-			case 2:
-				empconsole.addEmp();
-				break;
-			case 3:
-				empconsole.modifyEmp();
-				break;
-			case 4:
-				empconsole.removeEmp();
-				break;
-			case 0:
-				return;
-			default:
-				System.out.println("다시 입력해주세요.");
+				case 1:
+					empConsole.allEmp();
+					break;
+				case 2:
+					empConsole.addEmp();
+					break;
+				case 3:
+					empConsole.modifyEmp();
+					break;
+				case 4:
+					empConsole.removeEmp();
+					break;
+				case 0:
+					return;
+				default:
+					System.out.println("다시 입력해주세요.");
 			}
 		}
-		
+
 	}
 	
 	public void displayMenu() {

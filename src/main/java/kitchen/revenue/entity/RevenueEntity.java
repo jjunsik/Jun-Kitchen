@@ -7,10 +7,10 @@ import main.java.kitchen.menu.service.MenuService;
 import main.java.kitchen.menu.service.MenuServiceLogicLifeCycle;
 
 public class RevenueEntity {
-    private MenuService menuservice;
+    private final MenuService menuService;
 
     public RevenueEntity() {
-        this.menuservice = MenuServiceLogicLifeCycle.getUniqueInstance().getMenuService();
+        this.menuService = MenuServiceLogicLifeCycle.getUniqueInstance().getMenuService();
     }
 
     public void allmenuRev() {

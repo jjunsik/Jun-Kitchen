@@ -15,7 +15,7 @@ public class EmployeeConsole {
 		this.consoleutil = new ConsoleUtil();
 		this.empservice = EmployeeServiceLogicLifeCycle.getUniqueInstance().getEmployeeService();
 	}
-	
+
 	public void allEmp() {
 		List<EmployeeEntity> foundemps = empservice.findAll();
 		foundemps.sort((m1, m2) -> ((Integer)m1.getEmpPeriod()).compareTo(m2.getEmpPeriod()));
@@ -24,12 +24,12 @@ public class EmployeeConsole {
 			System.out.println("등록된 직원이 없습니다. 직원을 추가해주세요!");
 			return;
 		}
-		
-		for(EmployeeEntity empentity : foundemps) {
-			System.out.println(empentity.toString());
+
+		for(EmployeeEntity empEntity : foundEmp) {
+			System.out.println(empEntity.toString());
 		}
 	}
-	
+
 	public void addEmp() {
 		while(true) {
 			String empname = consoleutil.getValueOf("직원 이름(0. 이전) ");
@@ -52,15 +52,15 @@ public class EmployeeConsole {
 			System.out.println("직원이 추가되었습니다.\n" + newemp.toString());
 		}
 	}
-	
+
 	public void modifyEmp() {
 		String empno = consoleutil.getValueOf("직원 번호(0. 이전)");
 		if(empno.equals("0")) {
 			return;
 		}
-		
-		EmployeeEntity targetemp = empservice.findByNo(empno);
-		if(targetemp == null) {
+
+		EmployeeEntity targetEmp = empService.findByNo(empNo);
+		if(targetEmp == null) {
 			System.out.println("존재하지 않는 직원입니다.");
 			return;
 		}
@@ -95,15 +95,15 @@ public class EmployeeConsole {
 		
 		System.out.println("수정된 직원 정보 --> " + targetemp.toString());
 	}
-	
+
 	public void removeEmp() {
 		String empno = consoleutil.getValueOf("직원 번호(0. 이전)");
 		if(empno.equals("0")) {
 			return;
 		}
-		
-		EmployeeEntity targetemp = empservice.findByNo(empno);
-		if(targetemp == null) {
+
+		EmployeeEntity targetEmp = empService.findByNo(empNo);
+		if(targetEmp == null) {
 			System.out.println("존재하지 않는 직원입니다.");
 			return;
 		}

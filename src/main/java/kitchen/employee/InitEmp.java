@@ -5,8 +5,8 @@ import main.java.kitchen.employee.service.EmployeeService;
 import main.java.kitchen.employee.service.EmployeeServiceLogicLifeCycle;
 
 public class InitEmp {
-	public static EmployeeService empservice = EmployeeServiceLogicLifeCycle.getUniqueInstance().getEmployeeService();
-	
+	public static final EmployeeService empService = EmployeeServiceLogicLifeCycle.getUniqueInstance().getEmployeeService();
+
 	public static void set() {
 		EmployeeEntity emp1 = new EmployeeEntity("황준식", "인턴", 150);
 		EmployeeEntity emp2 = new EmployeeEntity("최혁재", "사원", 500);

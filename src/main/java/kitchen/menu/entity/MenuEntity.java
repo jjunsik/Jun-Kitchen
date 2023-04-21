@@ -1,12 +1,14 @@
 package main.java.kitchen.menu.entity;
 
+import main.java.kitchen.enums.MenuEnum;
+
 public class MenuEntity {
 	private String menuName;
 	private int menuPrice;
-	private String category;
+	private MenuEnum category;
 	private int menuRevenue;
 
-	public MenuEntity(String menuName, int menuPrice, String category, int menuRevenue) {
+	public MenuEntity(String menuName, int menuPrice, MenuEnum category, int menuRevenue) {
 		setMenuName(menuName);
 		setMenuPrice(menuPrice);
 		setCategory(category);
@@ -29,11 +31,11 @@ public class MenuEntity {
 		this.menuPrice = menuPrice;
 	}
 
-	public String getCategory() {
+	public MenuEnum getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(MenuEnum category) {
 		this.category = category;
 	}
 
@@ -47,10 +49,7 @@ public class MenuEntity {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("메뉴 이름 : ").append(menuName);
-		builder.append(", 메뉴 가격 : ").append(menuPrice).append("원");
-
-		return builder.toString();
+		return "메뉴 이름 : " + menuName +
+				", 메뉴 가격 : " + menuPrice + "원";
 	}
 }

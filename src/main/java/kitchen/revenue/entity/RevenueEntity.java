@@ -24,13 +24,16 @@ public class RevenueEntity {
             }
         });
 
-        System.out.println("----------------------- 한식 -----------------------");
-        for(MenuEntity menuentity : foundmenus) {
-            if(menuentity.getCategory().equals("한식")) {
-                System.out.println("메뉴 이름: " + menuentity.getMenuName() + ", 매출액: " + menuentity.getMenuRevenue() + "만원");
-            }
+        for (MenuEnum category : MenuEnum.values()){
+            printRevWithCategory(category, foundMenus);
         }
-        System.out.println("\n");
+
+        int allRev = 0;
+        for(MenuEntity menuEntity : foundMenus) {
+            allRev += menuEntity.getMenuRevenue();
+        }
+        System.out.println("총매출: " + allRev + "만원");
+    }
 
     private void printRevWithCategory(MenuEnum category, List<MenuEntity> foundMenus){
         System.out.println("----------------------- " + category.getName() + " -----------------------");
@@ -41,31 +44,6 @@ public class RevenueEntity {
             }
         }
         System.out.println("\n");
-
-        System.out.println("----------------------- 중식 -----------------------");
-        for(MenuEntity menuentity : foundmenus) {
-            if(menuentity.getCategory().equals("중식")) {
-                System.out.println("메뉴 이름: " + menuentity.getMenuName() + ", 매출액: " + menuentity.getMenuRevenue() + "만원");
-            }
-        }
-        System.out.println("\n");
-
-        System.out.println("----------------------- 일식 -----------------------");
-
-        for(MenuEntity menuentity : foundmenus) {
-            if(menuentity.getCategory().equals("일식")) {
-                System.out.println("메뉴 이름: " + menuentity.getMenuName() + ", 매출액: " + menuentity.getMenuRevenue() + "만원");
-            }
-        }
-        System.out.println("\n");
-
-        int allrev = 0;
-        for(MenuEntity menuentity : foundmenus) {
-            allrev += menuentity.getMenuRevenue();
-        }
-        System.out.println("총매출: " + allrev + "만원");
     }
-
-
 }
 

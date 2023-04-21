@@ -49,7 +49,6 @@ public class MenuConsole {
 				System.out.println(menuEntity);
 			}
 		}
-
 		System.out.println("\n");
 	}
 

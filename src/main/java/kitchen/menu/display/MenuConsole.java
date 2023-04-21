@@ -1,7 +1,9 @@
 package main.java.kitchen.menu.display;
 
+import java.util.Comparator;
 import java.util.List;
 
+import main.java.kitchen.enums.MenuEnum;
 import main.java.kitchen.menu.entity.MenuEntity;
 import main.java.kitchen.menu.service.MenuService;
 import main.java.kitchen.menu.service.MenuServiceLogicLifeCycle;
@@ -33,35 +35,17 @@ public class MenuConsole {
 			return;
 		}
 
-		System.out.println("----------------------- 한식 -----------------------");
-		for(MenuEntity menuentity : foundmenus) {
-			if(menuentity.getCategory().equals("한식")) {
-				System.out.println(menuentity.toString());
-			}
+		for (MenuEnum category : MenuEnum.values()) {
+			printMenusWithCategory(category, foundMenus);
 		}
-		System.out.println("\n");
 
-		System.out.println("----------------------- 양식 -----------------------");
-		for(MenuEntity menuentity : foundmenus) {
-			if(menuentity.getCategory().equals("양식")) {
-				System.out.println(menuentity.toString());
-			}
-		}
-		System.out.println("\n");
-
-		System.out.println("----------------------- 중식 -----------------------");
-		for(MenuEntity menuentity : foundmenus) {
-			if(menuentity.getCategory().equals("중식")) {
-				System.out.println(menuentity.toString());
-			}
-		}
-		System.out.println("\n");
+	}
 
 		System.out.println("----------------------- 일식 -----------------------");
 
-		for(MenuEntity menuentity : foundmenus) {
-			if(menuentity.getCategory().equals("일식")) {
-				System.out.println(menuentity.toString());
+		for(MenuEntity menuEntity : foundMenus) {
+			if(menuEntity.getCategory().equals(category)) {
+				System.out.println(menuEntity);
 			}
 		}
 
@@ -75,8 +59,15 @@ public class MenuConsole {
 				return;
 			}
 
-			int menuprice = consoleutil.getIntOf("메뉴 가격(0. 이전) ");
-			if(menuprice == 0) {
+			int cnt = 0;
+			for(MenuEnum menuEnum : MenuEnum.values()) {
+				if (menuEnum.getName().equals(category)) {
+					cnt += 1;
+				}
+			}
+
+			if (cnt != 1){
+				System.out.println("존재하지 않는 카테고리입니다.");
 				return;
 			}
 
@@ -111,8 +102,15 @@ public class MenuConsole {
 		if(newmenu == 0) {
 			return;
 		}
-		if(newmenu != null) {
-			targetmenu.setMenuPrice(newmenu);
+
+		System.out.println("수정 전 메뉴의 카테고리: " + targetMenu.getCategory().getName());
+
+		MenuEnum[] menuEnums = MenuEnum.values();
+
+		StringBuilder stringBuilder = new StringBuilder("수정할 메뉴의 카테고리(");
+		for (MenuEnum menuEnum : menuEnums){
+			stringBuilder.append(menuEnum.getName())
+					.append(enumSplit);
 		}
 
 		System.out.println("수정 전 메뉴의 카테고리: " + targetmenu.getCategory());
@@ -122,15 +120,20 @@ public class MenuConsole {
 			System.out.println("수정이 취소되었습니다.");
 			return;
 		}
-		else if(newcategory.equals("한식") || newcategory.equals("일식") || newcategory.equals("중식") || newcategory.equals("양식")) {
-			targetmenu.setCategory(newcategory);
+
+		int cnt = 0;
+		for(MenuEnum menuEnum : MenuEnum.values()) {
+			if (menuEnum.getName().equals(newCategory)) {
+				cnt += 1;
+			}
 		}
-		else {
-			System.out.println("잘못된 입력입니다.");
+
+		if (cnt != 1){
+			System.out.println("존재하지 않는 카테고리입니다.");
 			return;
 		}
 
-		menuservice.modifyMenu(targetmenu);
+		MenuEnum menuCategory = null;
 
 		System.out.println("수정된 메뉴 --> " + targetmenu.toString());
 	}
@@ -153,6 +156,8 @@ public class MenuConsole {
 			menuservice.removeMenu(targetmenu.getMenuName());
 		}else if(confirmstr.toLowerCase().equals("n") || confirmstr.equals("아니오")){
 			System.out.println("삭제를 취소했습니다.");
+		} else {
+			System.out.println("잘못된 입력입니다.");
 		}
 	}
 }

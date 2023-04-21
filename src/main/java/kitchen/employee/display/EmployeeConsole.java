@@ -1,10 +1,12 @@
 package main.java.kitchen.employee.display;
 
+import java.util.Comparator;
 import java.util.List;
 
 import main.java.kitchen.employee.entity.EmployeeEntity;
 import main.java.kitchen.employee.service.EmployeeService;
 import main.java.kitchen.employee.service.EmployeeServiceLogicLifeCycle;
+import main.java.kitchen.enums.EmpEnum;
 import main.java.util.ConsoleUtil;
 
 public class EmployeeConsole {
@@ -45,9 +47,37 @@ public class EmployeeConsole {
 			if(empjob.equals("0")) {
 				return;
 			}
-			
-			int empperiod = consoleutil.getIntOf("근무 시간(0. 이전) ");
-			if(empperiod == 0) {
+
+			boolean isEnum = false;
+			EmpEnum empJob = null;
+			for( EmpEnum empEnum : empEnums ) {
+				if (empEnum.getRank().equals(empJobString)) {
+					isEnum = true;
+					empJob = empEnum;
+					break;
+				}
+			}
+
+			if ( !isEnum ){
+				System.out.println("존재하지 않는 직급입니다.");
+				return;
+			}
+
+			int empPeriod = consoleUtil.getIntOf("근무 시간(" + replyUtil.getBackInt() + ". 이전)");
+			if(replyUtil.isBack(empPeriod)) {
+				return;
+			}
+
+			String confirmStr = consoleUtil.getValueOf("추가(Y: 예, N: 아니오)").toLowerCase();
+			if(replyUtil.checkIsYes(confirmStr)) {
+				EmployeeEntity newEmp = new EmployeeEntity(empName, empJob, empPeriod);
+				empService.addEmp(newEmp);
+				System.out.println("직원이 추가되었습니다.\n" + newEmp);
+			}else if(replyUtil.checkIsNo(confirmStr)){
+				System.out.println("취소되었습니다.");
+				return;
+			}else{
+				System.out.println("잘못된 입력입니다.");
 				return;
 			}
 			
@@ -83,16 +113,25 @@ public class EmployeeConsole {
 		if(newempjob.equals("0")) {
 			return;
 		}
-		if(newempjob != null) {
-			targetemp.setEmpJob(newempjob);
+
+		int cnt = 0;
+		for(EmpEnum empEnum : EmpEnum.values()) {
+			if (empEnum.getRank().equals(newEmpJob)) {
+				cnt += 1;
+			}
 		}
-		
-		Integer newempperiod = consoleutil.getIntOf("수정할 직원의 근무시간(0. 이전)");
-		if(newempperiod.equals(0)) {
+
+		if (cnt != 1){
+			System.out.println("존재하지 않는 직급입니다.");
 			return;
 		}
-		if(newempperiod != null) {
-			targetemp.setEmpPeriod(newempperiod);
+
+		EmpEnum empJob = null;
+
+		for (EmpEnum empEnum : empEnums) {
+			if (empEnum.getRank().equals(newEmpJob)) {
+				empJob = empEnum;
+			}
 		}
 		
 		empservice.modifyEmp(targetemp);

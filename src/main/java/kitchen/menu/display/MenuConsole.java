@@ -41,7 +41,8 @@ public class MenuConsole {
 
 	}
 
-		System.out.println("----------------------- 일식 -----------------------");
+	private void printMenusWithCategory (MenuEnum category, List<MenuEntity> foundMenus) {
+		System.out.println("----------------------- " + category.getName() + " -----------------------");
 
 		for(MenuEntity menuEntity : foundMenus) {
 			if(menuEntity.getCategory().equals(category)) {

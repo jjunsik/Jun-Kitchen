@@ -32,10 +32,12 @@ public class RevenueEntity {
         }
         System.out.println("\n");
 
-        System.out.println("----------------------- 양식 -----------------------");
-        for(MenuEntity menuentity : foundmenus) {
-            if(menuentity.getCategory().equals("양식")) {
-                System.out.println("메뉴 이름: " + menuentity.getMenuName() + ", 매출액: " + menuentity.getMenuRevenue() + "만원");
+    private void printRevWithCategory(MenuEnum category, List<MenuEntity> foundMenus){
+        System.out.println("----------------------- " + category.getName() + " -----------------------");
+
+        for(MenuEntity menuEntity : foundMenus){
+            if(menuEntity.getCategory().equals(category)) {
+                System.out.println("메뉴 이름: " + menuEntity.getMenuName() + ", 매출액: " + menuEntity.getMenuRevenue()+ "만원");
             }
         }
         System.out.println("\n");

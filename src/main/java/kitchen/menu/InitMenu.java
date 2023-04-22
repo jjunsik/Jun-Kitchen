@@ -5,15 +5,7 @@ import main.java.kitchen.menu.store.MenuStore;
 import main.java.kitchen.menu.store.MenuStoreLifeCycle;
 
 public class InitMenu {
-	private static MenuStore menustore = MenuStoreLifeCycle.getUniqueInstance().requestMenuStore();
-
-	static int ran1 = ((int)(Math.random()*401) + 100);
-	static int ran2 = ((int)(Math.random()*401) + 100);
-	static int ran3 = ((int)(Math.random()*401) + 100);
-	static int ran4 = ((int)(Math.random()*401) + 100);
-	static int ran5 = ((int)(Math.random()*401) + 100);
-	static int ran6 = ((int)(Math.random()*401) + 100);
-	static int ran7 = ((int)(Math.random()*401) + 100);
+	private static final MenuStore menuStore = MenuStoreLifeCycle.getUniqueInstance().requestMenuStore();
 
 	public static void set() {
 

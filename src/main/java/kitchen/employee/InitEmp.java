@@ -3,24 +3,28 @@ package main.java.kitchen.employee;
 import main.java.kitchen.employee.entity.EmployeeEntity;
 import main.java.kitchen.employee.service.EmployeeService;
 import main.java.kitchen.employee.service.EmployeeServiceLogicLifeCycle;
+import main.java.kitchen.enums.EmpEnum;
 
 public class InitEmp {
 	public static final EmployeeService empService = EmployeeServiceLogicLifeCycle.getUniqueInstance().getEmployeeService();
 
 	public static void set() {
-		EmployeeEntity emp1 = new EmployeeEntity("황준식", "인턴", 150);
-		EmployeeEntity emp2 = new EmployeeEntity("최혁재", "사원", 500);
-		EmployeeEntity emp3 = new EmployeeEntity("김수빈", "사원", 600);
-		EmployeeEntity emp4 = new EmployeeEntity("이창재", "대리", 1000);
-		EmployeeEntity emp5 = new EmployeeEntity("김홍빈", "대리", 1200);
-		EmployeeEntity emp6 = new EmployeeEntity("이동혁", "과장", 5000);
-		
-		empservice.addEmp(emp1);
-		empservice.addEmp(emp2);
-		empservice.addEmp(emp3);
-		empservice.addEmp(emp4);
-		empservice.addEmp(emp5);
-		empservice.addEmp(emp6);
-	}
 
+		String[] names = new String[]{
+				"황준식", "최혁재", "김수빈", "이창재", "김홍빈", "이동혁"
+		};
+
+		EmpEnum[] enums = new EmpEnum[]{
+				EmpEnum.CLERK, EmpEnum.SENIOR, EmpEnum.ASSISTANT, EmpEnum.MANAGER, EmpEnum.DEPUTY, EmpEnum.GENERAL
+		};
+
+		Integer[] periods = new Integer[]{
+				150, 500, 600, 1000, 1200, 5000
+		};
+
+		for (int i=0;i<names.length;i++){
+			EmployeeEntity emp = new EmployeeEntity(names[i], enums[i], periods[i]);
+			empService.addEmp(emp);
+		}
+	}
 }

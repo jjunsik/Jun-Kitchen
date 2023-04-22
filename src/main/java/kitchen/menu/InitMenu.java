@@ -1,5 +1,6 @@
 package main.java.kitchen.menu;
 
+import main.java.kitchen.enums.MenuEnum;
 import main.java.kitchen.menu.entity.MenuEntity;
 import main.java.kitchen.menu.store.MenuStore;
 import main.java.kitchen.menu.store.MenuStoreLifeCycle;
@@ -8,21 +9,28 @@ public class InitMenu {
 	private static final MenuStore menuStore = MenuStoreLifeCycle.getUniqueInstance().requestMenuStore();
 
 	public static void set() {
+		String[] names = new String[] {
+				"불고기", "파스타", "비빔밥", "삼겹살", "짜장면", "짬뽕", "초밥", "피자"
+		};
 
-		MenuEntity menu1 = new MenuEntity("불고기", 15000, "한식", ran1);
-		MenuEntity menu2 = new MenuEntity("파스타", 17000, "양식", ran2);
-		MenuEntity menu3 = new MenuEntity("비빔밥", 13000, "한식", ran3);
-		MenuEntity menu4 = new MenuEntity("피자", 20000, "양식", ran4);
-		MenuEntity menu5 = new MenuEntity("삼겹살", 16000, "한식", ran5);
-		MenuEntity menu6 = new MenuEntity("짜장면", 6000, "중식", ran6);
-		MenuEntity menu7 = new MenuEntity("초밥", 13000, "일식", ran7);
+		Integer[] prices = new Integer[] {
+				15000, 17000, 13000, 14000, 6000, 8000, 12000, 25000
+		};
 
-		menustore.create(menu1);
-		menustore.create(menu2);
-		menustore.create(menu3);
-		menustore.create(menu4);
-		menustore.create(menu5);
-		menustore.create(menu6);
-		menustore.create(menu7);
+		MenuEnum[] enums = new MenuEnum[]{
+				MenuEnum.KOREAN,
+				MenuEnum.WESTERN,
+				MenuEnum.KOREAN,
+				MenuEnum.KOREAN,
+				MenuEnum.CHINESE,
+				MenuEnum.CHINESE,
+				MenuEnum.JAPANESE,
+				MenuEnum.WESTERN
+		};
+
+		for (int i = 0; i < names.length; i++) {
+			MenuEntity menu = new MenuEntity(names[i], prices[i], enums[i], ((int)(Math.random()*401) + 100));
+			menuStore.create(menu);
+		}
 	}
 }

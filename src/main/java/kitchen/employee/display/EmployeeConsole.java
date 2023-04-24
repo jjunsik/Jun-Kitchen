@@ -164,10 +164,28 @@ public class EmployeeConsole {
 				empJob = empEnum;
 			}
 		}
-		
-		empservice.modifyEmp(targetemp);
-		
-		System.out.println("수정된 직원 정보 --> " + targetemp.toString());
+
+
+		int newEmpPeriod = consoleUtil.getIntOf("수정할 직원의 근무시간(" + replyUtil.getBackInt() + ". 이전)");
+		if(replyUtil.isBack(newEmpPeriod)) {
+			return;
+		} else if(newEmpPeriod < 0){
+			System.out.println("잘못된 입력입니다.");
+		}
+
+		String confirmStr = consoleUtil.getValueOf("수정(Y: 예, N: 아니오)").toLowerCase();
+
+		if(replyUtil.checkIsYes(confirmStr)) {
+			targetEmp.setEmpName(newEmpName);
+			targetEmp.setEmpJob(empJob);
+			targetEmp.setEmpPeriod(newEmpPeriod);
+			empService.modifyEmp(targetEmp);
+			System.out.println("수정된 직원 정보 --> " + targetEmp);
+		}else if(replyUtil.checkIsNo(confirmStr)){
+			System.out.println("취소되었습니다.");
+		}else{
+			System.out.println("잘못된 입력입니다.");
+		}
 	}
 
 	public void removeEmp() {

@@ -8,14 +8,19 @@ import main.java.kitchen.menu.entity.MenuEntity;
 import main.java.kitchen.menu.service.MenuService;
 import main.java.kitchen.menu.service.MenuServiceLogicLifeCycle;
 import main.java.util.ConsoleUtil;
+import main.java.util.ReplyUtil;
 
 public class MenuConsole {
-	private ConsoleUtil consoleutil;
-	private MenuService menuservice;
+	private final ConsoleUtil consoleUtil;
+	private final MenuService menuService;
+	private final ReplyUtil replyUtil;
+
+	private final String enumSplit = ", ";
 
 	public MenuConsole() {
-		this.consoleutil = new ConsoleUtil();
-		this.menuservice = MenuServiceLogicLifeCycle.getUniqueInstance().getMenuService();
+		this.consoleUtil = ConsoleUtil.getInstance();
+		this.menuService = MenuServiceLogicLifeCycle.getUniqueInstance().getMenuService();
+		this.replyUtil = ReplyUtil.getInstance();
 	}
 
 	public void allMenu(){
@@ -85,8 +90,8 @@ public class MenuConsole {
 
 	public void modifyMenu() {
 
-		String menuname = consoleutil.getValueOf("메뉴 이름(0. 이전)");
-		if(menuname.equals("0")) {
+		String menuName = consoleUtil.getValueOf("메뉴 이름(" + replyUtil.getBackString() + ". 이전)");
+		if(replyUtil.isBack(menuName)) {
 			return;
 		}
 
@@ -115,8 +120,7 @@ public class MenuConsole {
 
 		System.out.println("수정 전 메뉴의 카테고리: " + targetmenu.getCategory());
 
-		String newcategory = consoleutil.getValueOf("수정할 메뉴의 카테고리(한식, 양식, 중식, 일식 중 입력)(0. 이전)");
-		if(newcategory.equals("0")) {
+		if(replyUtil.isBack(newCategory)) {
 			System.out.println("수정이 취소되었습니다.");
 			return;
 		}
@@ -139,8 +143,8 @@ public class MenuConsole {
 	}
 
 	public void removeMenu() {
-		String menuname = consoleutil.getValueOf("메뉴 이름(0. 이전)");
-		if(menuname.equals("0")) {
+		String menuName = consoleUtil.getValueOf("메뉴 이름(" + replyUtil.getBackString() + ". 이전)");
+		if(replyUtil.isBack(menuName)) {
 			return;
 		}
 

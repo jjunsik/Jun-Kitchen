@@ -8,14 +8,19 @@ import main.java.kitchen.employee.service.EmployeeService;
 import main.java.kitchen.employee.service.EmployeeServiceLogicLifeCycle;
 import main.java.kitchen.enums.EmpEnum;
 import main.java.util.ConsoleUtil;
+import main.java.util.ReplyUtil;
 
 public class EmployeeConsole {
-	private ConsoleUtil consoleutil;
-	private EmployeeService empservice;
-	
+	private final ConsoleUtil consoleUtil;
+	private final EmployeeService empService;
+	private final ReplyUtil replyUtil;
+
+	private final String enumSplit = ", ";
+
 	public EmployeeConsole() {
-		this.consoleutil = new ConsoleUtil();
-		this.empservice = EmployeeServiceLogicLifeCycle.getUniqueInstance().getEmployeeService();
+		this.consoleUtil = ConsoleUtil.getInstance();
+		this.empService = EmployeeServiceLogicLifeCycle.getUniqueInstance().getEmployeeService();
+		this.replyUtil = ReplyUtil.getInstance();
 	}
 
 	public void allEmp() {
@@ -38,8 +43,8 @@ public class EmployeeConsole {
 
 	public void addEmp() {
 		while(true) {
-			String empname = consoleutil.getValueOf("직원 이름(0. 이전) ");
-			if(empname.equals("0")) {
+			String empName = consoleUtil.getValueOf("직원 이름(" + replyUtil.getBackString() + ". 이전)");
+			if(empName.equals(replyUtil.getBackString())) {
 				return;
 			}
 			
@@ -88,8 +93,8 @@ public class EmployeeConsole {
 	}
 
 	public void modifyEmp() {
-		String empno = consoleutil.getValueOf("직원 번호(0. 이전)");
-		if(empno.equals("0")) {
+		String empNo = consoleUtil.getValueOf("직원 번호(" + replyUtil.getBackString() + ". 이전)");
+		if(replyUtil.isBack(empNo)) {
 			return;
 		}
 
@@ -98,11 +103,11 @@ public class EmployeeConsole {
 			System.out.println("존재하지 않는 직원입니다.");
 			return;
 		}
-		
-		System.out.println("수정 전 직원 정보 --> " + targetemp/*.toString()*/);
-		
-		String newempname = consoleutil.getValueOf("수정할 직원의 이름(0. 이전)");
-		if(newempname.equals("0")) {
+
+		System.out.println("수정 전 직원 정보 --> " + targetEmp);
+
+		String newEmpName = consoleUtil.getValueOf("수정할 직원의 이름(" + replyUtil.getBackString() + ". 이전)");
+		if(newEmpName.equals(replyUtil.getBackString())) {
 			return;
 		}
 		if(newempname != null) {
@@ -140,8 +145,8 @@ public class EmployeeConsole {
 	}
 
 	public void removeEmp() {
-		String empno = consoleutil.getValueOf("직원 번호(0. 이전)");
-		if(empno.equals("0")) {
+		String empNo = consoleUtil.getValueOf("직원 번호(" + replyUtil.getBackString() + ". 이전)");
+		if(empNo.equals(replyUtil.getBackString())) {
 			return;
 		}
 

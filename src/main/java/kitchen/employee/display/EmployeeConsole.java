@@ -199,13 +199,15 @@ public class EmployeeConsole {
 			System.out.println("존재하지 않는 직원입니다.");
 			return;
 		}
-		
-		String confirmstr = consoleutil.getValueOf("이 직원을 삭제하시겠습니까?(Y: 예, N: 아니오)");
-		if(confirmstr.toLowerCase().equals("y")) {
-			System.out.println("직원 정보가 삭제되었습니다.\n삭제된 직원 --> " + targetemp);
-			empservice.removeEmp(targetemp.getEmpNo());
-		}else {
+
+		String confirmStr = consoleUtil.getValueOf("이 직원을 삭제하시겠습니까?(Y: 예, N: 아니오)").toLowerCase();
+		if(replyUtil.checkIsYes(confirmStr)) {
+			System.out.println("직원 정보가 삭제되었습니다.\n삭제된 직원 --> " + targetEmp);
+			empService.removeEmp(targetEmp.getEmpNo());
+		}else if(replyUtil.checkIsNo(confirmStr)){
 			System.out.println("삭제를 취소했습니다.");
+		}else{
+			System.out.println("잘못된 입력입니다.");
 		}
 	}
 }

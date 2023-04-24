@@ -47,9 +47,26 @@ public class EmployeeConsole {
 			if(empName.equals(replyUtil.getBackString())) {
 				return;
 			}
-			
-			String empjob = consoleutil.getValueOf("직급(0. 이전) ");
-			if(empjob.equals("0")) {
+
+			for(int i=0; i<empName.length(); i++) {
+				if (String.valueOf(empName.charAt(i)).matches("[a-zA-Z0-9]")) {
+					System.out.println("잘못된 입력입니다.");
+					return;
+				}
+			}
+
+			EmpEnum[] empEnums = EmpEnum.values();
+			StringBuilder stringBuilder = new StringBuilder("직급(");
+			for (EmpEnum empEnum : empEnums) {
+				stringBuilder.append( empEnum.getRank() )
+						.append( enumSplit );
+			}
+			String employeesString = stringBuilder.substring(0, stringBuilder.length()-2);
+			String empJobString = consoleUtil.getValueOf(employeesString
+					+ "("
+					+ replyUtil.getBackString() + ". 이전))");
+
+			if(replyUtil.isBack(empJobString)) {
 				return;
 			}
 
@@ -85,10 +102,6 @@ public class EmployeeConsole {
 				System.out.println("잘못된 입력입니다.");
 				return;
 			}
-			
-			EmployeeEntity newemp = new EmployeeEntity(empname, empjob, empperiod);
-			empservice.addEmp(newemp);
-			System.out.println("직원이 추가되었습니다.\n" + newemp.toString());
 		}
 	}
 
@@ -113,9 +126,19 @@ public class EmployeeConsole {
 		if(newempname != null) {
 			targetemp.setEmpName(newempname);
 		}
-		
-		String newempjob = consoleutil.getValueOf("수정할 직원의 직급(0. 이전)");
-		if(newempjob.equals("0")) {
+
+		EmpEnum[] empEnums = EmpEnum.values();
+		StringBuilder stringBuilder = new StringBuilder("수정할 직원의 직급\n--> ");
+		for (EmpEnum empEnum : empEnums) {
+			stringBuilder.append( empEnum.getRank() )
+					.append( enumSplit );
+		}
+		String employeesString = stringBuilder.substring(0, stringBuilder.length()-2);
+		String newEmpJob = consoleUtil.getValueOf(employeesString
+				+ "("
+				+ replyUtil.getBackString() + ". 이전))");
+
+		if(newEmpJob.equals(replyUtil.getBackString())) {
 			return;
 		}
 

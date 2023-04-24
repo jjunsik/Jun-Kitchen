@@ -123,8 +123,11 @@ public class EmployeeConsole {
 		if(newEmpName.equals(replyUtil.getBackString())) {
 			return;
 		}
-		if(newempname != null) {
-			targetemp.setEmpName(newempname);
+		for(int i=0; i<newEmpName.length(); i++) {
+			if (String.valueOf(newEmpName.charAt(i)).matches("[a-zA-Z0-9]")) {
+				System.out.println("잘못된 입력입니다.");
+				return;
+			}
 		}
 
 		EmpEnum[] empEnums = EmpEnum.values();
@@ -187,5 +190,4 @@ public class EmployeeConsole {
 			System.out.println("삭제를 취소했습니다.");
 		}
 	}
-
 }

@@ -158,7 +158,10 @@ public class MenuConsole {
 					.append(enumSplit);
 		}
 
-		System.out.println("수정 전 메뉴의 카테고리: " + targetmenu.getCategory());
+		String menusString = stringBuilder.substring(0, stringBuilder.length()-2);
+		String newCategory = consoleUtil.getValueOf(menusString
+				+ "("
+				+ replyUtil.getBackString() + ". 이전))");
 
 		if(replyUtil.isBack(newCategory)) {
 			System.out.println("수정이 취소되었습니다.");

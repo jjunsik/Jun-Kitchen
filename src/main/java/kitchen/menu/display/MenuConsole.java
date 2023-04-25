@@ -182,7 +182,23 @@ public class MenuConsole {
 
 		MenuEnum menuCategory = null;
 
-		System.out.println("수정된 메뉴 --> " + targetmenu.toString());
+		for (MenuEnum menuEnum : menuEnums) {
+			if (menuEnum.getName().equals(newCategory)) {
+				menuCategory = menuEnum;
+			}
+		}
+
+		String confirmStr= consoleUtil.getValueOf("수정(Y: 예, N: 아니오)").toLowerCase();
+		if (replyUtil.checkIsYes(confirmStr)){
+			targetMenu.setMenuPrice(newMenu);
+			targetMenu.setCategory(menuCategory);
+			menuService.modifyMenu(targetMenu);
+			System.out.println("수정된 메뉴 --> " + targetMenu);
+		} else if(replyUtil.checkIsNo(confirmStr)){
+			System.out.println("수정이 취소되었습니다.");
+		}else{
+			System.out.println("잘못된 입력입니다.");
+		}
 	}
 
 	public void removeMenu() {

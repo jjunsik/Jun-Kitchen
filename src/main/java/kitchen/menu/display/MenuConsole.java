@@ -101,15 +101,27 @@ public class MenuConsole {
 				return;
 			}
 
-			String category = consoleutil.getValueOf("카테고리(한식, 양식, 중식, 일식 중 입력)(0. 이전)");
-			if(category.equals("0")) {
-				return;
+			MenuEnum menuCategory = null;
+
+			for (MenuEnum menuEnum : menuEnums) {
+				if (menuEnum.getName().equals(category)) {
+					menuCategory = menuEnum;
+				}
 			}
 
-			int menurev = 0;
-			MenuEntity newmenu = new MenuEntity(menuname, menuprice, category, menurev);
-			menuservice.addMenu(newmenu);
-			System.out.println("메뉴가 추가되었습니다.\n" + newmenu.toString());
+			int menuRev = 0;
+			String confirmStr = consoleUtil.getValueOf("추가(Y: 예, N: 아니오)").toLowerCase();
+			if ( replyUtil.checkIsYes(confirmStr) ) {
+				MenuEntity newMenu = new MenuEntity(menuName, menuPrice, menuCategory, menuRev);
+				menuService.addMenu(newMenu);
+				System.out.println("메뉴가 추가되었습니다.\n" + newMenu);
+			} else if ( replyUtil.checkIsNo(confirmStr) ){
+				System.out.println("취소되었습니다.");
+				return;
+			} else {
+				System.out.println("잘못된 입력입니다.");
+				return;
+			}
 		}
 	}
 

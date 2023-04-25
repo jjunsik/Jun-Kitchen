@@ -140,8 +140,11 @@ public class MenuConsole {
 
 		System.out.println("수정 전 메뉴의 가격: " + targetMenu.getMenuPrice());
 
-		Integer newmenu = consoleutil.getIntOf("수정할 메뉴의 가격(0. 이전)");
-		if(newmenu == 0) {
+		int newMenu = consoleUtil.getIntOf("수정할 메뉴의 가격(" + replyUtil.getBackInt() + ". 이전)");
+		if(replyUtil.isBack(newMenu)) {
+			return;
+		} else if(newMenu < 0){
+			System.out.println("잘못된 입력입니다.");
 			return;
 		}
 

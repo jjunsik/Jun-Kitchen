@@ -59,8 +59,33 @@ public class MenuConsole {
 
 	public void addMenu() {
 		while(true) {
-			String menuname = consoleutil.getValueOf("메뉴 이름(0. 이전) ");
-			if(menuname.equals("0")) {
+			String menuName = consoleUtil.getValueOf("메뉴 이름(" + replyUtil.getBackString() + ". 이전)");
+			if(replyUtil.isBack(menuName)) {
+				return;
+			}
+
+			int menuPrice = consoleUtil.getIntOf("메뉴 가격(" + replyUtil.getBackInt() + ". 이전)");
+			if(replyUtil.isBack(menuPrice)) {
+				return;
+			} else if(menuPrice < 0){
+				System.out.println("잘못된 입력입니다.");
+				return;
+			}
+
+			MenuEnum[] menuEnums = MenuEnum.values();
+
+			StringBuilder stringBuilder = new StringBuilder("카테고리(");
+			for (MenuEnum menuEnum : menuEnums){
+				stringBuilder.append(menuEnum.getName())
+						.append(enumSplit);
+			}
+
+			String menusString = stringBuilder.substring(0, stringBuilder.length()-2);
+			String category = consoleUtil.getValueOf(menusString
+					+ "("
+					+ replyUtil.getBackString() + ". 이전))");
+
+			if(replyUtil.isBack(category)) {
 				return;
 			}
 

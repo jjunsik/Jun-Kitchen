@@ -213,11 +213,11 @@ public class MenuConsole {
 			return;
 		}
 
-		String confirmstr = consoleutil.getValueOf("이 매뉴를 삭제하시겠습니까?(Y: 예, N: 아니오)");
-		if(confirmstr.toLowerCase().equals("y") || confirmstr.equals("예")) {
-			System.out.println("메뉴가 삭제되었습니다.\n삭제된 메뉴 이름: " + targetmenu.getMenuName());
-			menuservice.removeMenu(targetmenu.getMenuName());
-		}else if(confirmstr.toLowerCase().equals("n") || confirmstr.equals("아니오")){
+		String confirmStr = consoleUtil.getValueOf("이 매뉴를 삭제하시겠습니까?(Y: 예, N: 아니오)").toLowerCase();
+		if (replyUtil.checkIsYes(confirmStr)) {
+			menuService.removeMenu(menuName);
+			System.out.println("메뉴가 삭제되었습니다.\n삭제된 메뉴 이름: " + menuName);
+		} else if (replyUtil.checkIsNo(confirmStr)){
 			System.out.println("삭제를 취소했습니다.");
 		} else {
 			System.out.println("잘못된 입력입니다.");
